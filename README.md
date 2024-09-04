@@ -10,7 +10,7 @@ The 3w6 is a low profile, split ortholinear keyboard with 36 keys. Each half has
 
 ## Keymaps Layout
 
-![layout](keyboard_layout.jpg) <!-- Placeholder for layout image -->
+![layout](keyboard_layout.svg)
 
 ## Bootloader
 
