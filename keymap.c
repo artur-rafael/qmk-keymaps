@@ -9,6 +9,8 @@
 #define RA(kc) MT(MOD_RALT, kc)
 #define RG(kc) MT(MOD_RGUI, kc)
 
+#define USD_EUR LT(0, KC_NO)
+
 enum layer_names
 {
    ABC, /* alpha (qwerty) */
@@ -52,7 +54,7 @@ LT(NAV, KC_ESC), LT(SYM, KC_SPC), LT(FNUM, KC_TAB),   KC_BSPC, LT(MSE, KC_ENT), 
    [SYM] = LAYOUT_split_3x5_3(
       KC_QUOT, S(KC_COMM), S(KC_DOT), S(KC_QUOT),  KC_DOT,      S(KC_7), S(KC_SCLN), S(KC_LBRC), S(KC_RBRC),    S(KC_5),
       S(KC_1),    KC_MINS, S(KC_EQL),     KC_EQL, S(KC_3),   S(KC_BSLS), S(KC_MINS),    S(KC_9),    S(KC_0), S(KC_SLSH),
-      S(KC_6),    KC_SLSH,   S(KC_8),    KC_BSLS,  KC_GRV,    S(KC_GRV),    S(KC_4),    KC_LBRC,    KC_RBRC,    S(KC_2),
+      S(KC_6),    KC_SLSH,   S(KC_8),    KC_BSLS,  KC_GRV,    S(KC_GRV),    USD_EUR,    KC_LBRC,    KC_RBRC,    S(KC_2),
                                 XXXXXXX, XXXXXXX, XXXXXXX,      KC_BSPC, KC_SCLN, KC_COMM
    ),
 
@@ -83,34 +85,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
    switch(keycode)
    {
-      case CAO_COMBO:
-         if (record->event.pressed)
-         {
-            tap_code16(ALGR(KC_COMM));
-            tap_code16(S(KC_GRV));
-            SEND_STRING("ao");
-         }
-         break;
-      case AO_COMBO:
-         if (record->event.pressed)
-         {
-            tap_code16(S(KC_GRV));
-            SEND_STRING("ao");
-         }
-         break;
-      case E_COMBO:
-         if (record->event.pressed)
-         {
-            tap_code16(S(KC_6));
-            tap_code16(KC_E);
-         }
-         break;
-      case O_COMBO:
-         if (record->event.pressed)
-         {
-            tap_code16(ALGR(KC_O));
-         }
-         break;
+   case CAO_COMBO:
+      if (record->event.pressed)
+      {
+         tap_code16(ALGR(KC_COMM));
+         tap_code16(S(KC_GRV));
+         SEND_STRING("ao");
+      }
+      return false;
+   case AO_COMBO:
+      if (record->event.pressed)
+      {
+         tap_code16(S(KC_GRV));
+         SEND_STRING("ao");
+      }
+      return false;
+   case E_COMBO:
+      if (record->event.pressed)
+      {
+         tap_code16(S(KC_6));
+         tap_code16(KC_E);
+      }
+      return false;
+   case O_COMBO:
+      if (record->event.pressed)
+      {
+         tap_code16(ALGR(KC_O));
+      }
+      return false;
+   case USD_EUR:
+      if (record->tap.count && record->event.pressed)
+      {
+         tap_code16(S(KC_4)); /* $ on tap */
+      }
+      else if (record->event.pressed)
+      {
+         tap_code16(ALGR(KC_5)); /* € on hold */
+      }
+      return false;
    }
    return true;
 }
