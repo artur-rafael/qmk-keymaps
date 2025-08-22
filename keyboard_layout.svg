@@ -67,8 +67,8 @@ text.footer {
     paint-order: stroke;
 }
 
-/* styling for combo tap, and key hold/shifted label text */
-text.combo, text.hold, text.shifted {
+/* styling for combo tap, and key non-tap label text */
+text.combo, text.hold, text.shifted, text.left, text.right {
     font-size: 11px;
 }
 
@@ -82,12 +82,20 @@ text.shifted {
     dominant-baseline: hanging;
 }
 
+text.left {
+    text-anchor: start;
+}
+
+text.right {
+    text-anchor: end;
+}
+
 text.layer-activator {
     text-decoration: underline;
 }
 
 /* styling for hold/shifted label text in combo box */
-text.combo.hold, text.combo.shifted {
+text.combo.hold, text.combo.shifted, text.combo.left, text.combo.right {
     font-size: 8px;
 }
 
@@ -115,7 +123,20 @@ path.combo {
     visibility: hidden;
 }
 /* End Tabler Icons Cleanup */
-</style>
+
+@media (prefers-color-scheme: dark) {
+svg.keymap { fill: #d1d6db; }
+rect.key { fill: #3f4750; }
+rect.key, rect.combo { stroke: #60666c; }
+rect.combo, rect.combo-separate { fill: #1f3d7a; }
+rect.held, rect.combo.held { fill: #854747; }
+text.label, text.footer { stroke: black; }
+text.trans { fill: #7e8184; }
+path.combo { stroke: #7f7f7f; }
+
+}
+
+svg.keymap { background-color: #FFF; }</style>
 <g transform="translate(30, 0)" class="layer-ABC">
 <text x="0" y="28" class="label" id="ABC">ABC:</text>
 <g transform="translate(0, 56)">
@@ -411,6 +432,7 @@ path.combo {
 <g transform="translate(532, 147)" class="key keypos-26">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
 <text x="0" y="0" class="key tap">$</text>
+<text x="0" y="24" class="key hold">€</text>
 </g>
 <g transform="translate(588, 140)" class="key keypos-27">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
@@ -751,9 +773,7 @@ path.combo {
 </g>
 <g transform="translate(560, 205)" class="key keypos-35">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
-<text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.6em">Caps</tspan><tspan x="0" dy="1.2em">Lock</tspan>
-</text>
+<text x="0" y="0" class="key tap">Caps</text>
 </g>
 </g>
 </g>
