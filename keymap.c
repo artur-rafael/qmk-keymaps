@@ -24,21 +24,18 @@ enum custom_keycodes
 {
    CAO_COMBO = SAFE_RANGE,
    AO_COMBO,
-   E_COMBO,
-   O_COMBO,
+   ESC_COMBO,
 };
 
 const uint16_t PROGMEM cao_combo[] = { LA(KC_S), LS(KC_D), COMBO_END };
 const uint16_t PROGMEM ao_combo[] = { LS(KC_D), LC(KC_F), COMBO_END };
-const uint16_t PROGMEM e_combo[] = { RC(KC_J), RS(KC_K), COMBO_END };
-const uint16_t PROGMEM o_combo[] = { RS(KC_K), RA(KC_L), COMBO_END };
+const uint16_t PROGMEM esc_combo[] = { RC(KC_J), RS(KC_K), COMBO_END };
 
 combo_t key_combos[] =
 {
    COMBO(cao_combo, CAO_COMBO),
    COMBO(ao_combo, AO_COMBO),
-   COMBO(e_combo, E_COMBO),
-   COMBO(o_combo, O_COMBO),
+   COMBO(esc_combo, ESC_COMBO),
 };
 
 /* clang-format off */
@@ -48,28 +45,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
           KC_Q,     KC_W,     KC_E,     KC_R, KC_T,      KC_Y,     KC_U,     KC_I,     KC_O,        KC_P,
       LG(KC_A), LA(KC_S), LS(KC_D), LC(KC_F), KC_G,      KC_H, RC(KC_J), RS(KC_K), RA(KC_L), RG(KC_SCLN),
           KC_Z,     KC_X,     KC_C,     KC_V, KC_B,      KC_N,     KC_M,  KC_COMM,   KC_DOT,     KC_SLSH,
-LT(NAV, KC_ESC), LT(SYM, KC_SPC), LT(FNUM, KC_TAB),   KC_BSPC, LT(MSE, KC_ENT), KC_RSFT
+         KC_ESC, LT(SYM, KC_SPC), LT(FNUM, KC_TAB), LT(MSE, KC_ENT), LT(NAV, KC_BSPC), KC_RSFT
    ),
 
    [SYM] = LAYOUT_split_3x5_3(
       KC_QUOT, S(KC_COMM), S(KC_DOT), S(KC_QUOT),  KC_DOT,      S(KC_7), S(KC_SCLN), S(KC_LBRC), S(KC_RBRC),    S(KC_5),
       S(KC_1),    KC_MINS, S(KC_EQL),     KC_EQL, S(KC_3),   S(KC_BSLS), S(KC_MINS),    S(KC_9),    S(KC_0), S(KC_SLSH),
       S(KC_6),    KC_SLSH,   S(KC_8),    KC_BSLS,  KC_GRV,    S(KC_GRV),    USD_EUR,    KC_LBRC,    KC_RBRC,    S(KC_2),
-                                XXXXXXX, XXXXXXX, XXXXXXX,      KC_BSPC, KC_SCLN, KC_COMM
+                                XXXXXXX, XXXXXXX, XXXXXXX,      KC_SCLN, KC_BSPC, KC_COMM
    ),
 
    [FNUM] = LAYOUT_split_3x5_3(
            KC_INS,     KC_F9,    KC_F10,    KC_F11, KC_F12,   S(KC_EQL),     KC_7,     KC_8,     KC_9,    S(KC_8),
       LG(KC_PSCR), LA(KC_F5), LS(KC_F6), LC(KC_F7),  KC_F8,        KC_0, RC(KC_4), RS(KC_5), LA(KC_6), RG(KC_DOT),
           KC_PAUS,     KC_F1,     KC_F2,     KC_F3,  KC_F4,     KC_MINS,     KC_1,     KC_2,     KC_3,    KC_SLSH,
-                                 XXXXXXX, XXXXXXX, XXXXXXX,     KC_BSPC, KC_ENT, KC_EQL
+                                 XXXXXXX, XXXXXXX, XXXXXXX,      KC_ENT, KC_BSPC, KC_EQL
    ),
 
    [NAV] = LAYOUT_split_3x5_3(
-      XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX,   KC_HOME, KC_PGDN, KC_PGUP,  KC_END, XXXXXXX,
+       KC_ESC, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX,   KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL,
       KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,   KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX,
-      XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                        XXXXXXX, XXXXXXX, XXXXXXX,    KC_DEL,  KC_ENT, KC_CAPS
+      KC_CAPS, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                        XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX
    ),
 
    [MSE] = LAYOUT_split_3x5_3(
@@ -100,17 +97,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
          SEND_STRING("ao");
       }
       return false;
-   case E_COMBO:
+   case ESC_COMBO:
       if (record->event.pressed)
       {
-         tap_code16(S(KC_6));
-         tap_code16(KC_E);
-      }
-      return false;
-   case O_COMBO:
-      if (record->event.pressed)
-      {
-         tap_code16(ALGR(KC_O));
+         tap_code16(KC_ESC);
       }
       return false;
    case USD_EUR:
