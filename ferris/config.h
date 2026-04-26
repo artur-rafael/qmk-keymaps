@@ -1,0 +1,7 @@
+#pragma once
+
+#define COMBO_ONLY_FROM_LAYER 0
+#define TAPPING_TERM 220
+
+#define POINTING_DEVICE_RIGHT
+#define SPLIT_POINTING_ENABLE
