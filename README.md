@@ -14,4 +14,4 @@ See each keyboard directory for build notes, layout files, and images.
 
 36-key split keyboard.
 
-![3w6](./view.jpg)
+![3w6](3w6/hero.jpg)
