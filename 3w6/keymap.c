@@ -24,7 +24,6 @@ enum custom_keycodes
 {
    CAO_COMBO = SAFE_RANGE,
    AO_COMBO,
-   ESC_COMBO,
 };
 
 const uint16_t PROGMEM cao_combo[] = { LA(KC_S), LS(KC_D), COMBO_END };
@@ -35,7 +34,7 @@ combo_t key_combos[] =
 {
    COMBO(cao_combo, CAO_COMBO),
    COMBO(ao_combo, AO_COMBO),
-   COMBO(esc_combo, ESC_COMBO),
+   COMBO(esc_combo, KC_ESC),
 };
 
 /* clang-format off */
@@ -52,14 +51,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
       KC_QUOT, S(KC_COMM), S(KC_DOT), S(KC_QUOT),  KC_DOT,      S(KC_7), S(KC_SCLN), S(KC_LBRC), S(KC_RBRC),    S(KC_5),
       S(KC_1),    KC_MINS, S(KC_EQL),     KC_EQL, S(KC_3),   S(KC_BSLS), S(KC_MINS),    S(KC_9),    S(KC_0), S(KC_SLSH),
       S(KC_6),    KC_SLSH,   S(KC_8),    KC_BSLS,  KC_GRV,    S(KC_GRV),    USD_EUR,    KC_LBRC,    KC_RBRC,    S(KC_2),
-                                XXXXXXX, XXXXXXX, XXXXXXX,      KC_SCLN, KC_BSPC, KC_COMM
+                                XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,    KC_BSPC, XXXXXXX
    ),
 
    [FNUM] = LAYOUT_split_3x5_3(
            KC_INS,     KC_F9,    KC_F10,    KC_F11, KC_F12,   S(KC_EQL),     KC_7,     KC_8,     KC_9,    S(KC_8),
       LG(KC_PSCR), LA(KC_F5), LS(KC_F6), LC(KC_F7),  KC_F8,        KC_0, RC(KC_4), RS(KC_5), LA(KC_6), RG(KC_DOT),
           KC_PAUS,     KC_F1,     KC_F2,     KC_F3,  KC_F4,     KC_MINS,     KC_1,     KC_2,     KC_3,    KC_SLSH,
-                                 XXXXXXX, XXXXXXX, XXXXXXX,      KC_ENT, KC_BSPC, KC_EQL
+                                 XXXXXXX, XXXXXXX, XXXXXXX,      KC_EQL, KC_BSPC, XXXXXXX
    ),
 
    [NAV] = LAYOUT_split_3x5_3(
@@ -95,12 +94,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       {
          tap_code16(S(KC_GRV));
          SEND_STRING("ao");
-      }
-      return false;
-   case ESC_COMBO:
-      if (record->event.pressed)
-      {
-         tap_code16(KC_ESC);
       }
       return false;
    case USD_EUR:
