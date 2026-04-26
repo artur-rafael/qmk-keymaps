@@ -1,16 +1,10 @@
-# Custom Keyboard
+# 3w6
 
-This repository includes my keyboard layout of my custom 3w6 keyboard.
+My personal keymap for the keycapsss 3w6.
 
-The 3w6 is a low profile, split ortholinear keyboard with 36 keys. Each half has 3x5 vertically staggered keys and 3 thumb keys.
+![3w6](./view.jpg)
 
-![3w6](keyboard_aesthetic.jpg)
-
-![3w6](keyboard_view.jpg)
-
-## Keymaps Layout
-
-![layout](keyboard_layout.svg)
+![3w6 layout](./keymap.svg)
 
 ## Bootloader
 
